@@ -10,6 +10,7 @@ pipeline{
     post{
         always{
             echo "Always"
+            slackSend(channel: "#job-notification", message: "Spring Boot Pipeline done.")
         }
         success{
             echo "Success"
