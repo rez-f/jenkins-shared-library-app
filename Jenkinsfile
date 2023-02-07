@@ -1,9 +1,13 @@
 pipeline{
     agent any
     stages{
-        stage('Hello'){
+        stage('Init'){
             steps{
-                echo "Hello Pipeline"   
+                script{
+                    for (int i = 0; i <= 5; i++) {
+                        echo("[${i}] Preparing...")
+                    }
+                }
             }
         }
         stage('Build'){
