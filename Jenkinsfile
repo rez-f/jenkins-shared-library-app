@@ -2,6 +2,10 @@ pipeline{
 
     agent none
 
+    environment {
+        AUTHOR = "Rez"
+    }
+
     stages{
         stage('Verbose'){
             agent {
@@ -11,6 +15,7 @@ pipeline{
             }
 
             steps {
+                echo("Author: ${AUTHOR}")
                 echo("Start Job: ${env.JOB_NAME}")
                 echo("Start Build: ${env.BUILD_NUMBER}")
                 echo("Branch Name: ${env.BRANCH_NAME}")
