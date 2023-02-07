@@ -14,6 +14,10 @@ pipeline{
                 }
             }
 
+            environment {
+                USER = credentials("demo-creds")
+            }
+
             steps {
                 echo("Author: ${AUTHOR}")
                 echo("Start Job: ${env.JOB_NAME}")
