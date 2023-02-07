@@ -6,10 +6,10 @@ pipeline{
         stage('Init'){
             agent {
                 node {
-                    label alpha
+                    label "alpha"
                 }
             }
-            
+
             steps{
                 script{
                     for (int i = 1; i <= 5; i++) {
@@ -22,7 +22,7 @@ pipeline{
         stage('Build'){
             agent {
                 node {
-                    label beta
+                    label "beta"
                 }
             }
 
