@@ -6,6 +6,11 @@ pipeline{
                 echo "Hello Pipeline"   
             }
         }
+        stage('Build'){
+            steps{
+                sh('./mvnw clean')
+            }
+        }
     }
     post{
         always{
