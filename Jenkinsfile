@@ -1,21 +1,37 @@
 pipeline{
-    agent any
+
+    agent none
+
     stages{
         stage('Init'){
+            agent {
+                node {
+                    label alpha
+                }
+            }
+            
             steps{
                 script{
-                    for (int i = 0; i <= 5; i++) {
+                    for (int i = 1; i <= 5; i++) {
                         echo("[${i}] Preparing...")
                     }
                 }
             }
         }
+
         stage('Build'){
+            agent {
+                node {
+                    label beta
+                }
+            }
+
             steps{
                 sh('./mvnw clean')
             }
         }
     }
+
     post{
         always{
             echo "Always"
