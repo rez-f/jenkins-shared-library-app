@@ -3,6 +3,20 @@ pipeline{
     agent none
 
     stages{
+        stage('Verbose'){
+            agent {
+                node {
+                    label "alpha"
+                }
+            }
+
+            steps {
+                echo("Start Job: ${env.JOB_NAME}")
+                echo("Start Build: ${env.BUILD_NUMBER}")
+                echo("Branch Name: ${env.BRANCH_NAME}")
+            }
+        }
+
         stage('Init'){
             agent {
                 node {
