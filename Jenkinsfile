@@ -15,6 +15,10 @@ pipeline{
         timeout(time: 2, unit: 'MINUTES')
     }
 
+    triggers {
+        pollSCM("*/5 * * * *")
+    }
+
     stages{
         stage('Verbose'){
             agent {
@@ -45,7 +49,7 @@ pipeline{
 
             steps{
                 script{
-                    echo("Deployment status ${DEPLOY}")
+                    echo("Deployment status ${params.DEPLOY}")
 
                     for (int i = 1; i <= 5; i++) {
                         echo("[${i}] Preparing...")
@@ -63,6 +67,24 @@ pipeline{
 
             steps{
                 sh('./mvnw clean')
+            }
+        }
+
+        stage('Deploy'){
+            agent {
+                node {
+                    label "beta"
+                }
+            }
+
+            input {
+                message "Deploy now?"
+                ok "Yes"
+                submitter "admin"
+            }
+
+            steps {
+                echo "Deploy step"
             }
         }
     }
