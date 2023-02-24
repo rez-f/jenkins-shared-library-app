@@ -6,6 +6,10 @@ pipeline{
         AUTHOR = "Rez"
     }
 
+    options {
+        disableConcurrentBuilds()
+    }
+
     stages{
         stage('Verbose'){
             agent {
