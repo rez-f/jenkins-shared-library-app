@@ -81,6 +81,9 @@ pipeline{
                 message "Deploy now?"
                 ok "Yes"
                 submitter "admin"
+                parameters {
+                    choice(name: "ENVIRONMENT", choices: ['DEV', 'STAGING', 'PRODUCTION'], description: "Deployment Environment")
+                }
             }
 
             steps {
