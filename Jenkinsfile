@@ -6,6 +6,10 @@ pipeline{
         AUTHOR = "Rez"
     }
 
+    parameters {
+        booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Deploy after build?')
+    }
+
     options {
         disableConcurrentBuilds()
         timeout(time: 2, unit: 'MINUTES')
@@ -41,6 +45,10 @@ pipeline{
 
             steps{
                 script{
+                    if(!${DEPLOY}){
+                        echo("This job perform build only without deployment.")
+                    }
+
                     for (int i = 1; i <= 5; i++) {
                         echo("[${i}] Preparing...")
                     }
@@ -64,7 +72,7 @@ pipeline{
     post{
         always{
             echo "Always"
-            slackSend(channel: "#job-notification", message: "Spring Boot Pipeline done.")
+            slackSend(channel: "#job-notification", message: "[${env.BUILD_NUMBER}] Spring Boot Pipeline done.")
         }
         success{
             echo "Success"
