@@ -45,9 +45,7 @@ pipeline{
 
             steps{
                 script{
-                    if(!${DEPLOY}){
-                        echo("This job perform build only without deployment.")
-                    }
+                    echo("Deployment status ${DEPLOY}")
 
                     for (int i = 1; i <= 5; i++) {
                         echo("[${i}] Preparing...")
