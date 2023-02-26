@@ -90,6 +90,24 @@ pipeline{
                 echo "Deploy step"
             }
         }
+
+        stage('Release'){
+            agent {
+                node {
+                    label "beta"
+                }
+            }
+
+            when {
+                expression {
+                    return params.DEPLOY
+                }
+            }
+
+            steps {
+                echo "Performing release..."
+            }
+        }
     }
 
     post{
