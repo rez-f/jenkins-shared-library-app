@@ -21,18 +21,31 @@ pipeline{
 
     stages{
         stage('Verbose'){
-            agent {
-                node {
-                    label "alpha"
-                }
-            }
-
             environment {
                 USER = credentials("demo-creds")
             }
 
-            stages {
+            parallel {
+
+                stage('Connecting to VM...'){
+                    agent {
+                        node {
+                            label "alpha"
+                        }
+                    }
+
+                    steps {
+                        echo("Connecting... ... ... ... .")
+                    }
+                }
+                
                 stage('Print') {
+                    agent {
+                        node {
+                            label "alpha"
+                        }
+                    }
+
                     steps {
                         echo("Author: ${AUTHOR}")
                         echo("Using ${USER_USR} creds")
@@ -43,6 +56,12 @@ pipeline{
                 }
 
                 stage('Cleaning up') {
+                    agent {
+                        node {
+                            label "alpha"
+                        }
+                    }
+                    
                     steps {
                         echo("Cleaning up...")
                     }
