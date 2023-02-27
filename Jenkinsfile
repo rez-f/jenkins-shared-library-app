@@ -21,6 +21,8 @@ pipeline{
 
     stages{
         stage('Verbose'){
+            failFast true
+            
             environment {
                 USER = credentials("demo-creds")
             }
