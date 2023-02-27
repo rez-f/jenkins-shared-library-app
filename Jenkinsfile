@@ -42,6 +42,14 @@ pipeline{
                         }
 
                         steps {
+                            withCredentials([usernamePassword(
+                                credentialsId: "demo-creds",
+                                usernameVariable: "USER",
+                                passwordVariable: "PASSWORD"
+                            )]){
+                                sh('echo "Using Credentials $USER"')
+                            }
+
                             echo("Selected OS ${OS} with ${arch}")
                         }
                     }
