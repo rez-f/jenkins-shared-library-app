@@ -20,16 +20,45 @@ pipeline{
     }
 
     stages{
+        stage('OS Selection'){
+            matrix {
+                axes {
+                    axis {
+                        name "OS"
+                        values "linux", "windows"
+                    }
+                    axis {
+                        name "arch"
+                        values "amd64", "arm"
+                    }
+                }
+            }
+
+            stages {
+                stage('VM Provisioning'){
+                    agent {
+                        node {
+                            label "beta"
+                        }
+                    }
+
+                    steps {
+                        echo("Selected OS ${OS} with ${arch}")
+                    }
+                }
+            }
+        }
+
         stage('Verbose'){
             failFast true
-            
+
             environment {
                 USER = credentials("demo-creds")
             }
 
             parallel {
 
-                stage('Connecting to VM...'){
+                stage('Init Connection'){
                     agent {
                         node {
                             label "alpha"
