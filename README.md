@@ -1,5 +1,3 @@
-# Belajar Spring Dasar
+# Spring Boot App
 
-by Programmer Zaman Now
-
-# Trigger jenkins
+Jenkins Shared Library Implementation
