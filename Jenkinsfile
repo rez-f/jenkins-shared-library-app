@@ -19,6 +19,14 @@ pipeline {
                 }
             }
         }
+        stage('verbose') {
+            steps {
+                script {
+                    def config = libraryResource("build/config.json")
+                    echo(config)
+                }
+            }
+        }
         stage('maven compile') {
             steps {
                 script {
