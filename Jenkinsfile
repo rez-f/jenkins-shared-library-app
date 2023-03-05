@@ -15,6 +15,7 @@ pipeline {
         stage('groovy vars') {
             steps {
                 script {
+                    echo(hello())
                     hello.world()
                     echo(hello.author())
                 }
