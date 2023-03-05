@@ -16,9 +16,12 @@ pipeline {
             steps {
                 script {
                     echo(hello())
-                    hello.world()
-                    echo(hello.author())
                 }
+            }
+        }
+        stage('maven compile') {
+            steps {
+                maven("clean")
             }
         }
     }
