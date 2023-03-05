@@ -16,6 +16,7 @@ pipeline {
             steps {
                 script {
                     hello.world()
+                    echo(hello.author())
                 }
             }
         }
